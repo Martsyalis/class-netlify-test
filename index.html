@@ -11,7 +11,7 @@
         <input id="body" />
 
         <div id="tweet">Click here to save a tweet</div>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             document.getElementById("tweet").addEventListener("click", () => {
                 const getTweetData = () => ({
@@ -19,11 +19,13 @@
                     body: document.getElementById("body").value,
                 });
                 console.log("sending a tweet: ", getTweetData());
-                axios
-                    .post("/.netlify/functions/tweeting-api", {
-                        body: JSON.stringify(getTweetData()),
-                    })
-                    .then(console.log);
+                axios({
+                    url: "/.netlify/functions/tweeting-api",
+                    method: "post",
+                    data: getTweetData(),
+                })
+                    .then(console.log)
+                    .catch(console.error);
             });
         </script>
     </body>
