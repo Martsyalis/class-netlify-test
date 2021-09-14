@@ -20,7 +20,7 @@
                 });
                 console.log("sending a tweet: ", getTweetData());
                 axios({
-                    url: "/.netlify/functions/tweeting-api",
+                    url: "/.netlify/functions/tweeting-api/",
                     method: "post",
                     data: getTweetData(),
                 })
