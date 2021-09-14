@@ -10,10 +10,13 @@
         <input id="author" />
         <input id="body" />
 
-        <div id="tweet">Click here to save a tweet</div>
+        <div id="post">Click here to save a tweet</div>
+        <div id="get">click here to get all tweets</div>
+        <div id="results"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            document.getElementById("tweet").addEventListener("click", () => {
+            document.getElementById("post").addEventListener("click", () => {
                 const getTweetData = () => ({
                     author: document.getElementById("author").value,
                     body: document.getElementById("body").value,
@@ -25,6 +28,18 @@
                     data: getTweetData(),
                 })
                     .then(console.log)
+                    .catch(console.error);
+            });
+            document.getElementById("get").addEventListener("click", () => {
+                axios({
+                    url: "/.netlify/functions/tweeting-api",
+                    method: "get",
+                })
+                    .then(
+                        data =>
+                            (document.getElementById("results").innerHTML =
+                                JSON.stringify(data))
+                    )
                     .catch(console.error);
             });
         </script>
